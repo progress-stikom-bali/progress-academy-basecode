@@ -3,27 +3,30 @@
 
 {{-- Section untuk menaruh content ke layout --}}
 @section('content')
-    <a class="btn btn-primary" href="{{ route('admin.admin.create') }}">Add Admin</a>
+    <a class="btn btn-primary" href="{{ route('admin.rooms.create') }}">Add Room</a>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Description</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Price</th>
+                <th scope="col">Available</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($admin as $item)
+            @forelse ($rooms as $item)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->role->name }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>{{ $item->roomType->name }}</td>
+                    <td>{{ $item->roomType->daily_price }}</td>
+                    <td>{!! $item->is_available == 0 ? '<button class="btn btn-success">Yes</button>' : '<button class="btn btn-danger">No</button>' !!}</td>
                     <td class="d-flex gap-2">
-                        <a href="{{ route('admin.admin.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.admin.delete') }}" method="POST">
+                    <a href="{{ route('admin.rooms.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('admin.rooms.delete') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>

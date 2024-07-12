@@ -8,27 +8,27 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'admin' ? 'active' : '' }}">
+                <a class="nav-link {{ $activePage == 'admin' ? 'active' : '' }}" href="{{ route('admin.admin.index') }}">
                     <span data-feather="file"></span>
                     Admin
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $activePage == 'user' ? 'active' : '' }}">
+                <a class="nav-link {{ $activePage == 'user' ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
                     <span data-feather="shopping-cart"></span>
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="users"></span>
+                <a class="nav-link {{ $activePage == 'room-type' ? 'active' : '' }}" href="{{ route('admin.roomType.index') }}">
+                    <span data-feather="shopping-cart"></span>
                     Room Type
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2"></span>
-                    Rooms
+                <a class="nav-link {{ $activePage == 'room' ? 'active' : '' }}" href="{{ route('admin.rooms.index') }}">
+                    <span data-feather="shopping-cart"></span>
+                    Room
                 </a>
             </li>
             <li class="nav-item">

@@ -19,7 +19,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
-                    <td>{{ $item->role_id }}</td>
+                    <td>{{ $item->role->name }}</td>
                     <td class="d-flex gap-2">
                         <a href="{{ route('admin.user.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('admin.user.delete') }}" method="POST">

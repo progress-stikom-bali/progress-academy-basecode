@@ -8,8 +8,8 @@ class DashboardController extends Controller
 {
     public function index(){
         $viewData = [
-            'title' => "Dashboard",
-            'activePage' => "dashboard"
+            'title' => 'Dashboard',
+            'activePage' => 'dashboard',
         ];
 
         return view('admin.dashboard', $viewData);

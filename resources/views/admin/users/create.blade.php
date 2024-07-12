@@ -27,11 +27,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select name="role_id" id="role" class="form-select" required>
-                <option value="">Select Role</option>
-                <option value="2">User</option>
-            </select>
+            <input type="hidden" name="role_id" id="role" class="form-control" value="2">
             @error('role_id')
                 <div>{{ $message }}</div>
             @enderror
