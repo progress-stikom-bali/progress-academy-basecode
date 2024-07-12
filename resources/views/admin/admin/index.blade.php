@@ -1,5 +1,5 @@
 {{-- Menggunakan layouts admin --}}
-@extends('layouts.admin')
+@extends('layouts.template')
 
 {{-- Section untuk menaruh content ke layout --}}
 @section('content')
