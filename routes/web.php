@@ -8,16 +8,16 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
 // Import Controller
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoomTypeController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoomTypeController;
+use App\Http\Controllers\Admin\BookingController;
 
 // Import Member Controller
-use App\Http\Controllers\Member\MemberDashboardController;
-use App\Http\Controllers\Member\MemberBookingController;
+use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
+use App\Http\Controllers\Member\BookingController as MemberBookingController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');

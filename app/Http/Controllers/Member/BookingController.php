@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
-class MemberBookingController extends Controller
+class BookingController extends Controller
 {
     public function index()
     {
@@ -40,7 +41,7 @@ class MemberBookingController extends Controller
             if ($request->hasFile('payment_receipt')) {
                 // Simpan file gambar ke dalam folder 'payment_receipts' di 'storage/app/public'
                 $file = $request->file('payment_receipt');
-                $paymentReceiptPath = Storage::disk('public')->put('payment_receipts', $file);
+                $paymentReceiptPath = Storage::disk('private')->put('payment_receipts', $file);
                 $validatedData['payment_receipt'] = $paymentReceiptPath;
             }
 
@@ -48,6 +49,9 @@ class MemberBookingController extends Controller
             $room->update(['is_available' => 1]);
 
             return redirect()->route('user.dashboard')->with('success', 'Booking has been successfully created.');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create booking due to validation error.');
         } catch (Exception $e) {
             dd($e);
             return redirect()->back()->with('error', 'An error occurred while creating the booking. Please try again.');

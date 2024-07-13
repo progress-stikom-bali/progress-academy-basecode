@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 // Import Model
 use App\Models\Room;
 
-class MemberDashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index(){
         $rooms = Room::all();

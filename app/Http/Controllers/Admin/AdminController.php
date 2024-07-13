@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 //  Method
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\Controller;
 use Exception;
 
 // Models
@@ -40,17 +42,28 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         try {
+            // Validasi data request
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
-                'role_id' => 'required',
+                'role_id' => 'required|exists:roles,id', // Pastikan role_id ada di tabel roles
             ]);
-            Hash::make($validatedData['password']);
+
+            // Hash password
+            $validatedData['password'] = Hash::make($validatedData['password']);
+
+            // Buat user baru
             User::create($validatedData);
+
+            // Redirect dengan pesan sukses
             return redirect()->route('admin.admin.index')->with('success', 'User created successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create user due to validation error.');
         } catch (Exception $e) {
-            return back()->withInput()->with('error', 'Failed to create user!' . $e);
+            // Tangani error umum lainnya
+            return back()->withInput()->with('error', 'Failed to create user! ' . $e->getMessage());
         }
     }
 
@@ -76,6 +89,9 @@ class AdminController extends Controller
             ]);
             $admin->update($validatedData);
             return redirect()->route('admin.admin.index')->with('success', 'User updated successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update user due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to update user!' . $e);
         }
@@ -87,6 +103,9 @@ class AdminController extends Controller
         try {
             $admin->delete();
             return redirect()->route('admin.admin.index')->with('success', 'User deleted successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to delete user due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to delete user!' . $e);
         }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 // Methods
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 // Models
@@ -49,6 +51,9 @@ class UserController extends Controller
             Hash::make($validatedData['password']);
             User::create($validatedData);
             return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create user due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to create user!' . $e);
         }
@@ -76,6 +81,9 @@ class UserController extends Controller
             ]);
             $user->update($validatedData);
             return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update user due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to update user!' . $e);
         }
@@ -87,6 +95,9 @@ class UserController extends Controller
         try {
             $user->delete();
             return redirect()->route('admin.user.index')->with('success', 'User deleted successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create user due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to delete user!' . $e);
         }

@@ -9,14 +9,14 @@
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
             @error('name')
-                <div>{{ $message }}</div>
+                <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" name="description" id="description" cols="30" rows="10" required></textarea>
             @error('description')
-                <div>{{ $message }}</div>
+                <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-3">
@@ -28,7 +28,7 @@
                 @endforeach
             </select>
             @error('room_type_id')
-                <div>{{ $message }}</div>
+                <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <input type="hidden" name="is_available" value="0">

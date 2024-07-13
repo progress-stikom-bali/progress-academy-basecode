@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 // Methods
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 // Models
@@ -45,6 +47,9 @@ class RoomController extends Controller
             ]);
             Room::create($validatedData);
             return redirect()->route('admin.rooms.index')->with('success', 'Room created successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create room due to validation error.');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to create Room' . $e);
         }
@@ -73,6 +78,9 @@ class RoomController extends Controller
             ]);
             $room->update($validatedData);
             return redirect()->route('admin.rooms.index')->with('success', 'Room edited successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update room due to validation error.');
         } catch (Exception $e){
             return back()->withInput()->with('error', 'Failed to edit Room!' . $e);
         }
@@ -84,6 +92,9 @@ class RoomController extends Controller
         try {
             $room->delete();
             return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to delete room due to validation error.');
         } catch (Exception $e) {  
             return back()->withInput()->with('error', 'Failed to delete Room!' . $e);
         }
