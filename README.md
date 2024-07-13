@@ -7,5 +7,5 @@ Step to use this:
 4. php artisan serve
 
 Account:
-email: admin@admin.com
-password: password
+- email: admin@admin.com
+- password: password
