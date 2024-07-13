@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Room;
+use Illuminate\Support\Facades\Storage;
 use Exception;
 
 class MemberBookingController extends Controller
@@ -36,9 +37,11 @@ class MemberBookingController extends Controller
         try {
             $paymentReceiptPath = null;
             $room = Room::find($validatedData['room_id']);
-
             if ($request->hasFile('payment_receipt')) {
-                $paymentReceiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
+                // Simpan file gambar ke dalam folder 'payment_receipts' di 'storage/app/public'
+                $file = $request->file('payment_receipt');
+                $paymentReceiptPath = Storage::disk('public')->put('payment_receipts', $file);
+                $validatedData['payment_receipt'] = $paymentReceiptPath;
             }
 
             Booking::create($validatedData);
@@ -46,6 +49,7 @@ class MemberBookingController extends Controller
 
             return redirect()->route('user.dashboard')->with('success', 'Booking has been successfully created.');
         } catch (Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', 'An error occurred while creating the booking. Please try again.');
         }
     }

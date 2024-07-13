@@ -36,6 +36,7 @@ class BookingController extends Controller
             ); 
             return back()->with('success', 'Booking has been successfully approved.');
         } catch (Exception $e) {
+            dd($e);
             return back()->with('error', 'An error occurred while approving the booking. Please try again.');
         }
     }
@@ -50,6 +51,13 @@ class BookingController extends Controller
                     'rejected_reason' => $request->rejected_reason,
                 ]
             ); 
+
+            $room->update(
+                [
+                    'is_available' => 0,
+                ]
+            );
+
             return back()->with('success', 'Booking has been successfully rejected.');
         } catch (Exception $e) {
             return back()->with('error', 'An error occurred while rejecting the booking. Please try again.');

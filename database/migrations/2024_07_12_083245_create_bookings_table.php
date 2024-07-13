@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('payment_receipt');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->enum('status', ['pending', 'confirmed', 'rejected']);
+            $table->enum('status', ['pending', 'approved', 'rejected']);
             $table->text('rejected_reason')->nullable();
             $table->timestamps();
 
