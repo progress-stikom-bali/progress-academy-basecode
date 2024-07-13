@@ -82,7 +82,7 @@ class RoomController extends Controller
             $validatedData = $request->validate([
                 'room_type_id' => 'required',
                 'name' => 'required|string|max:255',
-                'image' => 'nullable|image|',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description' => 'required',
             ]);
             if ($request->hasFile('image')) {

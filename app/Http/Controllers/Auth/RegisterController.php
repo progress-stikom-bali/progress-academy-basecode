@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use Exception;
 
@@ -43,6 +44,9 @@ class RegisterController extends Controller
 
             // Redirect to the home page
             return redirect()->route('user.dashboard')->with('success', 'Welcome to PROGRESS BOOK!');
+        } catch (ValidationException $e) {
+            // Tangani error validasi
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to register your Account!' . $e);
         }
