@@ -13,7 +13,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $item->roomType->name }} | {{ $item->name }}</h5>
                 <p class="card-text">
-                    {{ $item->description }}
+                    {{ Str::limit($item->description, 200) }}
                 </p>
                 <h5>IDR {{ number_format($item->roomType->daily_price) }}</h5>
                 @if ($item->is_available == 0)

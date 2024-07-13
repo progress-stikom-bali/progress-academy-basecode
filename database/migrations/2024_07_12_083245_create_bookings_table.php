@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
             $table->string('payment_receipt');
-            $table->time('start_date');
-            $table->time('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->enum('status', ['pending', 'confirmed', 'rejected']);
             $table->text('rejected_reason')->nullable();
             $table->timestamps();

@@ -9,7 +9,8 @@ use Exception;
 
 class MemberBookingController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $bookings = Booking::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -28,18 +29,17 @@ class MemberBookingController extends Controller
             'room_id' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'payment_receipt' => 'required',
             'status' => 'required',
-            // 'payment_receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'payment_receipt' => 'required',
         ]);
 
         try {
-            // $paymentReceiptPath = null;
+            $paymentReceiptPath = null;
             $room = Room::find($validatedData['room_id']);
 
-            // if ($request->hasFile('payment_receipt')) {
-            //     $paymentReceiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
-            // }
+            if ($request->hasFile('payment_receipt')) {
+                $paymentReceiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
+            }
 
             Booking::create($validatedData);
             $room->update(['is_available' => 1]);

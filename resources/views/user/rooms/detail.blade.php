@@ -25,7 +25,7 @@
                     <label for="end_date">Check Out</label>
                     <input type="date" name="end_date" class="form-control" required>
                     <label for="transfer_receipt">Transfer Receipt</label>
-                    <input type="text" name="payment_receipt" class="form-control mb-2" value="test">
+                    <input type="file" name="payment_receipt" class="form-control mb-2">
                     @if ($room->is_available == 0)
                         <button type="submit" class="btn btn-primary">Book Now!</button>
                     @else

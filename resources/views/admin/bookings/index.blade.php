@@ -23,7 +23,33 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $item->user->name }}</td>
                     <td>{{ $item->room->name }}</td>
-                    <td>{{ $item->payment_receipt }}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentReceiptModal">
+                            View
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="paymentReceiptModal" tabindex="-1" role="dialog"
+                            aria-labelledby="paymentReceiptModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="paymentReceiptModalLabel">Payment Receipt</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{ $item->payment_receipt }}" alt="payment_receipt">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     <td>{{ \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') }}</td>
                     <td>
@@ -40,7 +66,8 @@
                         <form action="{{ route('admin.booking.approve') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->id }}">
-                            <button type="submit" class="btn btn-success" onclick="return confirm('Are You Sure?')">Aprrove</button>
+                            <button type="submit" class="btn btn-success"
+                                onclick="return confirm('Are You Sure?')">Aprrove</button>
                         </form>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">
