@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Improt Auth Controller
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 
 // Import Controller
 use App\Http\Controllers\DashboardController;
@@ -20,6 +21,8 @@ use App\Http\Controllers\Member\MemberBookingController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware('AuthCheck')->prefix('admin')->group(function () {

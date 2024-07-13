@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // Methods
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Exception;
 
 // Models
@@ -45,6 +46,7 @@ class UserController extends Controller
                 'password' => 'required|string|min:8',
                 'role_id' => 'required',
             ]);
+            Hash::make($validatedData['password']);
             User::create($validatedData);
             return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
         } catch (Exception $e) {
