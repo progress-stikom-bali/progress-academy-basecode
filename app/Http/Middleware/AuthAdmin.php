@@ -21,9 +21,9 @@ class AuthAdmin
         }
 
         if (Auth::user()->role_id == 1) {
-            return redirect()->route('admin.dashboard');
+            return $next($request);
         }
 
-        return $next($request);
+        abort(403);
     }
 }

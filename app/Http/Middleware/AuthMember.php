@@ -21,9 +21,9 @@ class AuthMember
         }
 
         if (Auth::user()->role_id == 2) {
-            return redirect()->route('user.dashboard');
+            return $next($request);
         }
 
-        return $next($request);
+        abort(403);
     }
 }

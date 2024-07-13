@@ -25,7 +25,7 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::middleware('AuthCheck')->prefix('admin')->group(function () {
+Route::middleware('AuthAdmin')->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -67,7 +67,7 @@ Route::middleware('AuthCheck')->prefix('admin')->group(function () {
     Route::post('/booking/reject', [BookingController::class, 'reject'])->name('admin.booking.reject');
 });
 
-Route::middleware('AuthCheck')->prefix('user')->group(function () {
+Route::middleware('AuthMember')->prefix('user')->group(function () {
     // Dashboard
     Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/dashboard/room/detail/{id}', [MemberDashboardController::class, 'roomDetail'])->name('user.roomDetail');
