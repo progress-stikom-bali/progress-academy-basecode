@@ -38,7 +38,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ $activePage == 'booking' ? 'active' : '' }}"
+                        href="{{ route('admin.booking.index') }}" 
+                    >
                         <span data-feather="layers"></span>
                         Booking
                     </a>
@@ -52,10 +54,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $activePage == 'transactions' ? 'active' : '' }}"
-                        href="{{ route('user.dashboard') }}">
+                    <a class="nav-link {{ $activePage == 'booking' ? 'active' : '' }}"
+                        href="{{ route('user.transactions') }}">
                         <span data-feather="shopping-cart"></span>
-                        Transactions
+                        Your Bookings
                     </a>
                 </li>
             @endif

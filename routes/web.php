@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomTypeController;
+use App\Http\Controllers\BookingController;
 
 // Import Member Controller
 use App\Http\Controllers\Member\MemberDashboardController;
@@ -56,11 +57,17 @@ Route::middleware('AuthCheck')->prefix('admin')->group(function () {
     Route::get('/rooms/edit/{id}', [RoomController::class, 'edit'])->name('admin.rooms.edit');
     Route::post('/rooms/update/{id}', [RoomController::class, 'update'])->name('admin.rooms.update');
     Route::post('/rooms/delete', [RoomController::class, 'destroy'])->name('admin.rooms.delete');
+
+    // Booking Routes
+    Route::get('/booking', [BookingController::class, 'index'])->name('admin.booking.index');
+    Route::post('/booking/approve', [BookingController::class, 'approve'])->name('admin.booking.approve');
+    Route::post('/booking/reject', [BookingController::class, 'reject'])->name('admin.booking.reject');
 });
 
 Route::middleware('AuthCheck')->prefix('user')->group(function () {
     // Dashboard
     Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/dashboard/room/detail/{id}', [MemberDashboardController::class, 'roomDetail'])->name('user.roomDetail');
+    Route::get('/dashboard/transactions', [MemberBookingController::class, 'index'])->name('user.transactions');
     Route::post('/dashboard/room/book', [MemberBookingController::class, 'book'])->name('user.book');
 });

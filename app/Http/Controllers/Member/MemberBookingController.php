@@ -9,27 +9,40 @@ use Exception;
 
 class MemberBookingController extends Controller
 {
+    public function index(){
+        $bookings = Booking::where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $viewData = [
+            'title' => "Booking",
+            'activePage' => "booking",
+            'bookings' => $bookings,
+        ];
+
+        return view('user.bookings.index', $viewData);
+    }
     public function book(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'room_id' => 'required|exists:rooms,id',
+            'user_id' => 'required',
+            'room_id' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'transfer_receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_available' => 'required',
+            'end_date' => 'required|date',
+            'payment_receipt' => 'required',
+            'status' => 'required',
+            // 'payment_receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
-            $paymentReceiptPath = null;
+            // $paymentReceiptPath = null;
             $room = Room::find($validatedData['room_id']);
 
-            if ($request->hasFile('transfer_receipt')) {
-                $paymentReceiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
-            }
+            // if ($request->hasFile('payment_receipt')) {
+            //     $paymentReceiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
+            // }
 
             Booking::create($validatedData);
-            $room->update(['is_available' => $request->is_available]);
+            $room->update(['is_available' => 1]);
 
             return redirect()->route('user.dashboard')->with('success', 'Booking has been successfully created.');
         } catch (Exception $e) {

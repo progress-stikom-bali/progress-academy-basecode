@@ -21,7 +21,7 @@
                 @else
                     <button class="btn btn-danger">Booked</button>
                 @endif
-                <a href="{{ route('user.roomDetail', $item->id) }}" class="btn btn-primary">Book Now</a>
+                <a href="{{ route('user.roomDetail', $item->id) }}" class="btn btn-primary">Detail</a>
             </div>
         </div>
     @empty
