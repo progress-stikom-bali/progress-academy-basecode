@@ -3,7 +3,7 @@
 
 {{-- Section untuk menaruh content ke layout --}}
 @section('content')
-    <form action="{{ route('admin.rooms.store') }}" method="POST">
+    <form action="{{ route('admin.rooms.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -16,6 +16,13 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" name="description" id="description" cols="30" rows="10" required></textarea>
             @error('description')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="transfer_receipt">Image</label>
+            <input type="file" name="image" class="form-control mb-2" required>
+            @error('image')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>

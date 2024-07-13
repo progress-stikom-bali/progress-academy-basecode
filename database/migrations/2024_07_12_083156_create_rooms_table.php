@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('room_type_id');
             $table->string('name');
+            $table->string('image');
             $table->text('description');
             $table->boolean('is_available');
             $table->timestamps();

@@ -53,7 +53,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create user due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to create user!' . $e);
         }
@@ -83,7 +83,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update user due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to update user!' . $e);
         }
@@ -97,7 +97,7 @@ class UserController extends Controller
             return redirect()->route('admin.user.index')->with('success', 'User deleted successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create user due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to delete user!' . $e);
         }

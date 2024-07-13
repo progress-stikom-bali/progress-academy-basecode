@@ -19,11 +19,17 @@ use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\BookingController as MemberBookingController;
 
+// Import File Controller
+use App\Http\Controllers\FileController;
+
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::get('payment-receipts/{filename}', [FileController::class, 'showPaymentReceipt'])->name('show.payment.receipt');
+Route::get('room-image/{filename}', [FileController::class, 'showImageRoom'])->name('show.room.image');
 
 Route::middleware('AuthAdmin')->prefix('admin')->group(function () {
     // Dashboard

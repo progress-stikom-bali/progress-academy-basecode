@@ -51,9 +51,8 @@ class BookingController extends Controller
             return redirect()->route('user.dashboard')->with('success', 'Booking has been successfully created.');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create booking due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
-            dd($e);
             return redirect()->back()->with('error', 'An error occurred while creating the booking. Please try again.');
         }
     }

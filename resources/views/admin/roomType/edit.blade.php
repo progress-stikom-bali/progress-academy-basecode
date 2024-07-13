@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label for="daily_price" class="form-label">Daily Price</label>
-            <input type="number" class="form-control" id="dailyPrice" name="daily_price" value="{{ $data->daily_price }}" required>  
+            <input type="number" class="form-control" id="dailyPrice" name="daily_price" min="1" value="{{ $data->daily_price }}" required>  
             @error('daily_price')
                 <p class="text-danger">{{ $message }}</p>
             @enderror

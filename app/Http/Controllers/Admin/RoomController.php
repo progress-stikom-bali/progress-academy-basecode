@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // Methods
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Exception;
 
@@ -42,14 +43,21 @@ class RoomController extends Controller
             $validatedData = $request->validate([
                 'room_type_id' => 'required',
                 'name' => 'required|string|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description' => 'required',
                 'is_available' => 'required',
             ]);
+            if ($request->hasFile('image')) {
+                // Simpan file gambar ke dalam folder 'images' di 'storage/app/private'
+                $file = $request->file('image');
+                $imagePath = Storage::disk('private')->put('room_images', $file);
+                $validatedData['image'] = $imagePath;
+            }
             Room::create($validatedData);
             return redirect()->route('admin.rooms.index')->with('success', 'Room created successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create room due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to create Room' . $e);
         }
@@ -74,14 +82,25 @@ class RoomController extends Controller
             $validatedData = $request->validate([
                 'room_type_id' => 'required',
                 'name' => 'required|string|max:255',
+                'image' => 'nullable|image|',
                 'description' => 'required',
             ]);
+            if ($request->hasFile('image')) {
+                // Hapus gambar lama jika ada
+                if ($room->image && Storage::disk('private')->exists($room->image)) {
+                    Storage::disk('private')->delete($room->image);
+                }
+                // Simpan file gambar baru ke dalam folder 'room_images' di 'storage/app/private'
+                $file = $request->file('image');
+                $imagePath = Storage::disk('private')->put('room_images', $file);
+                $validatedData['image'] = $imagePath;
+            }
             $room->update($validatedData);
             return redirect()->route('admin.rooms.index')->with('success', 'Room edited successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update room due to validation error.');
-        } catch (Exception $e){
+            return back()->withErrors($e->validator)->withInput();
+        } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to edit Room!' . $e);
         }
     }
@@ -94,8 +113,8 @@ class RoomController extends Controller
             return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to delete room due to validation error.');
-        } catch (Exception $e) {  
+            return back()->withErrors($e->validator)->withInput();
+        } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to delete Room!' . $e);
         }
     }

@@ -41,7 +41,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{ Storage::url($item->payment_receipt) }}" alt="payment_receipt" class="w-100">
+                                        <img src="{{ route('show.payment.receipt', basename($item->payment_receipt)) }}" alt="payment_receipt" class="w-100">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

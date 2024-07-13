@@ -9,7 +9,7 @@
     </div>
     @forelse ($rooms as $item)
         <div class="card" style="width: 18rem;">
-            <img src="{{ asset('images/hotel_room.jpg') }}" class="card-img-top" alt="...">
+            <img src="{{ route('show.room.image', basename($item->image)) }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ $item->roomType->name }} | {{ $item->name }}</h5>
                 <p class="card-text">

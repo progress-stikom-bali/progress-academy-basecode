@@ -3,7 +3,7 @@
 
 {{-- Section untuk menaruh content ke layout --}}
 @section('content')
-    <form action="{{ route('admin.rooms.update', $data->id) }}" method="POST">
+    <form action="{{ route('admin.rooms.update', $data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -16,6 +16,14 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" name="description" id="description" cols="30" rows="10" required>{{ $data->description }}</textarea>
             @error('description')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+        <img src="{{ route('show.room.image', basename($data->image)) }}" alt="room_image" class="w-25 my-3">
+        <div class="mb-3">
+            <label for="room_image">Image</label>
+            <input type="file" name="image" class="form-control mb-2" required>
+            @error('image')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>

@@ -45,7 +45,7 @@ class RoomTypeController extends Controller
             return redirect()->route('admin.roomType.index')->with('success', 'Room Type created successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to create room type due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Failed to create Room Type' . $e);
         }
@@ -74,7 +74,7 @@ class RoomTypeController extends Controller
             return redirect()->route('admin.roomType.index')->with('success', 'Room Type edited successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to update room type due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e){
             return back()->withInput()->with('error', 'Failed to edit Room Type!' . $e);
         }
@@ -88,7 +88,7 @@ class RoomTypeController extends Controller
             return redirect()->route('admin.roomType.index')->with('success', 'Room Type deleted successfully!');
         } catch (ValidationException $e) {
             // Tangani error validasi
-            return back()->withErrors($e->validator)->withInput()->with('error', 'Failed to delete room type due to validation error.');
+            return back()->withErrors($e->validator)->withInput();
         } catch (Exception $e) {  
             return back()->withInput()->with('error', 'Failed to delete Room Type!' . $e);
         }

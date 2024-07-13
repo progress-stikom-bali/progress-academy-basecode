@@ -4,53 +4,50 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <img src="{{ asset('images/hotel_room.jpg') }}" class="w-100" alt="hotel-image">
+                <img src="{{ route('show.room.image', basename($room->image)) }}" alt="room_image"
+                    class="w-100">
             </div>
             <div class="col-6">
                 <h1>{{ $room->name }}</h1>
                 <h3 class="text-secondary">{{ $room->roomType->name }}</h3>
-                @if ($room->is_available == 0)
-                    <button class="btn btn-success">Available</button>
-                @else
-                    <button class="btn btn-danger">Booked</button>
-                @endif
                 <p>{{ $room->description }}</p>
-                <form action="{{ route('user.book') }}" method="POST" class="d-flex flex-column gap-2"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    @error('user_id')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <input type="hidden" name="room_id" value="{{ $room->id }}">
-                    @error('room_id')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <input type="hidden" name="status" value="pending">
-                    @error('status')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <label for="start_date">Check In</label>
-                    <input type="date" name="start_date" class="form-control" required>
-                    @error('start_date')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <label for="end_date">Check Out</label>
-                    <input type="date" name="end_date" class="form-control" required>
-                    @error('end_date')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <label for="transfer_receipt">Transfer Receipt</label>
-                    <input type="file" name="payment_receipt" class="form-control mb-2" required>
-                    @error('payment_receipt')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    @if ($room->is_available == 0)
+                @if ($room->is_available == 0)
+                    <form action="{{ route('user.book') }}" method="POST" class="d-flex flex-column gap-2"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        @error('user_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <input type="hidden" name="room_id" value="{{ $room->id }}">
+                        @error('room_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <input type="hidden" name="status" value="pending">
+                        @error('status')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <label for="start_date">Check In</label>
+                        <input type="datetime-local" name="start_date" class="form-control" required>
+                        @error('start_date')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <label for="end_date">Check Out</label>
+                        <input type="datetime-local" name="end_date" class="form-control" required>
+                        @error('end_date')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <label for="payment_receipt">Payment Receipt</label>
+                        <input type="file" name="payment_receipt" class="form-control mb-2" required>
+                        @error('payment_receipt')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                         <button type="submit" class="btn btn-primary">Book Now!</button>
-                    @else
-                        <button class="btn btn-danger">Booked</button>
-                    @endif
-                </form>
+                    </form>
+                @else
+                    <button class="btn btn-danger w-100">This room has been booked</button>
+                    <a href="{{ route('user.dashboard') }}" class="btn btn-success w-100 mt-2">Back</a>
+                @endif
             </div>
         </div>
     </div>
