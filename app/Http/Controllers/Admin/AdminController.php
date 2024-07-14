@@ -22,7 +22,6 @@ class AdminController extends Controller
         // Variabel untuk data yang ada di view
         $viewData = [
             'title' => "Admin",
-            'activePage' => "admin",
             // Variabel admin diberikan untuk halaman disini
             'admin' => $admin,
         ];
@@ -34,7 +33,6 @@ class AdminController extends Controller
     {
         $viewData = [
             'title' => "Create Admin",
-            'activePage' => "admin",
         ];
         return view('admin.admin.create', $viewData);
     }

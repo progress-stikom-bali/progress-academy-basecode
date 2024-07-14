@@ -20,7 +20,6 @@ class BookingController extends Controller
         $bookings = Booking::orderBy('created_at', 'desc')->get();
         $viewData = [
             'title' => "Booking",
-            'activePage' => "booking",
             'bookings' => $bookings,
         ];
 

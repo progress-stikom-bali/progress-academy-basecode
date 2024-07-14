@@ -9,8 +9,9 @@
     </div>
     <div class="d-flex gap-4">
         @forelse ($rooms as $item)
-            <div class="card" style="width: 18rem; height:30rem">
-                <img src="{{ route('show.room.image', basename($item->image)) }}" class="card-img-top" alt="...">
+            <div class="card" style="width: 18rem; height:500px;">
+                <img src="{{ Storage::url($item->image) }}" class="card-img-top"
+                    style="height: 200px; width: 100%; object-fit: cover;" alt="room-image">
                 <div class="card-body d-flex flex-column gap-2 justify-content-between">
                     <div class="d-flex flex-column">
                         <h5 class="card-title">{{ $item->roomType->name }} | {{ $item->name }}</h5>

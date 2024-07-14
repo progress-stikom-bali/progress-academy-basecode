@@ -18,7 +18,6 @@ class LoginController extends Controller
         }
         $viewData = [
             'title' => 'Login',
-            'activePage' => 'login',
         ];
 
         return view('auth.login', $viewData);

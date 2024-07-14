@@ -29,7 +29,6 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('payment-receipts/{filename}', [FileController::class, 'showPaymentReceipt'])->name('show.payment.receipt');
-Route::get('room-image/{filename}', [FileController::class, 'showImageRoom'])->name('show.room.image');
 
 Route::middleware('AuthAdmin')->prefix('admin')->group(function () {
     // Dashboard

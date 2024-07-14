@@ -15,7 +15,6 @@ class DashboardController extends Controller
         $rooms = Room::all();
         $viewData = [
             'title' => 'Dashboard',
-            'activePage' => 'dashboard',
             'rooms' => $rooms,
         ];
 
@@ -26,7 +25,6 @@ class DashboardController extends Controller
         $room = Room::find($id);
         $viewData = [
             'title' => 'Room Detail',
-            'activePage' => 'dashboard',
             'room' => $room,
         ];
 

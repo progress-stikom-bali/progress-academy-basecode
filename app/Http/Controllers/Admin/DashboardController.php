@@ -12,7 +12,6 @@ class DashboardController extends Controller
     // dd(Auth::user());
         $viewData = [
             'title' => 'Dashboard',
-            'activePage' => 'dashboard',
         ];
 
         return view('admin.dashboard', $viewData);

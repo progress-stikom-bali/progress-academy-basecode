@@ -18,7 +18,6 @@ class BookingController extends Controller
             ->get();
         $viewData = [
             'title' => "Booking",
-            'activePage' => "booking",
             'bookings' => $bookings,
         ];
 

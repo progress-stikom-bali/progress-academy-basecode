@@ -22,7 +22,6 @@ class UserController extends Controller
         // Variabel untuk data yang ada di view
         $viewData = [
             'title' => "User",
-            'activePage' => "user",
             // Variabel user diberikan untuk halaman disini
             'users' => $user,
         ];
@@ -34,7 +33,6 @@ class UserController extends Controller
     {
         $viewData = [
             'title' => "Create User",
-            'activePage' => "user",
         ];
         return view('admin.users.create', $viewData);
     }
@@ -64,7 +62,6 @@ class UserController extends Controller
         $user = User::find($id);
         $viewData = [
             'title' => "Edit User",
-            'activePage' => "user",
             'user' => $user,
         ];
         return view('admin.users.edit', $viewData);

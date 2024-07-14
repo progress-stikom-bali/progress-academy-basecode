@@ -19,7 +19,6 @@ class RoomTypeController extends Controller
         $roomTypes = RoomType::all();
         $viewData = [
             'title' => "Room Type Management",
-            'activePage' => "room-type",
             'roomTypes' => $roomTypes,
         ];
         return view('admin.roomType.index', $viewData);
@@ -29,7 +28,6 @@ class RoomTypeController extends Controller
     {
         $viewData = [
             'title' => "Create Room Type",
-            'activePage' => "room-type",
         ];
         return view('admin.roomType.create', $viewData);
     }
@@ -56,7 +54,6 @@ class RoomTypeController extends Controller
         $roomType = RoomType::find($id);
         $viewData = [
             'title' => "Edit Room Type",
-            'activePage' => "room-type",
             'data' => $roomType,
         ];
         return view('admin.roomType.edit', $viewData);

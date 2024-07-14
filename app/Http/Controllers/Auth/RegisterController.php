@@ -17,7 +17,6 @@ class RegisterController extends Controller
     {
         $viewData = [
             'title' => 'Register',
-            'activePage' => 'register',
         ];
 
         return view('auth.register', $viewData);

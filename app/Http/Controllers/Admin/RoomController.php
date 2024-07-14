@@ -21,7 +21,6 @@ class RoomController extends Controller
         $rooms = Room::all();
         $viewData = [
             'title' => "Rooms Management",
-            'activePage' => "room",
             'rooms' => $rooms,
         ];
         return view('admin.rooms.index', $viewData);
@@ -31,7 +30,6 @@ class RoomController extends Controller
     {
         $viewData = [
             'title' => "Create Room",
-            'activePage' => "room",
             'roomTypes' => RoomType::all(),
         ];
         return view('admin.rooms.create', $viewData);
@@ -68,7 +66,6 @@ class RoomController extends Controller
         $room = Room::find($id);
         $viewData = [
             'title' => "Edit Room",
-            'activePage' => "room",
             'data' => $room,
             'roomTypes' => RoomType::all(),
         ];

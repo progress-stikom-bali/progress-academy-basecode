@@ -40,8 +40,8 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="{{ route('show.room.image', basename($item->image)) }}"
-                                            alt="room_image" class="w-100">
+                                        <img src="{{ Storage::url($item->image) }}" class="card-img-top"
+                                            alt="room-image">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
