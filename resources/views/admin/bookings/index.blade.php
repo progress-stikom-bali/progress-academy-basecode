@@ -12,6 +12,7 @@
                 <th scope="col">Payment</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Amount</th>
                 <th scope="col">Status</th>
                 <th scope="col">Rejected Reason</th>
                 <th scope="col">Actions</th>
@@ -51,8 +52,9 @@
                             </div>
                         </div>
                     </td>
-                    <td>{{ \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') }}</td>
+                    <td>{{ $item->start_date }}</td>
+                    <td>{{ $item->end_date }}</td>
+                    <td>{{ number_format($item->amount) }}</td>
                     <td>
                         @if ($item->status == 'pending')
                             <button class="btn btn-warning">Pending</button>

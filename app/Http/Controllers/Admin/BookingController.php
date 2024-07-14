@@ -31,9 +31,16 @@ class BookingController extends Controller
     {
         try {
             $booking = Booking::find($request->id);
+            $room = Room::find($booking->room_id);
             $booking->update(
                 [
                     'status' => 'approved',
+                ]
+            );
+            
+            $room->update(
+                [
+                    'is_available' => 1,
                 ]
             );
             return back()->with('success', 'Booking has been successfully approved.');
@@ -52,12 +59,6 @@ class BookingController extends Controller
                 [
                     'status' => 'rejected',
                     'rejected_reason' => $request->rejected_reason,
-                ]
-            );
-
-            $room->update(
-                [
-                    'is_available' => 0,
                 ]
             );
             return back()->with('success', 'Booking has been successfully rejected.');

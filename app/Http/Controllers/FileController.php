@@ -25,12 +25,12 @@ class FileController extends Controller
     {
         $path = 'room_images/' . $filename;
 
-        if (!Storage::disk('private')->exists($path)) {
+        if (!Storage::disk('public')->exists($path)) {
             abort(404);
         }
 
-        $file = Storage::disk('private')->get($path);
-        $type = Storage::disk('private')->mimeType($path);
+        $file = Storage::disk('public')->get($path);
+        $type = Storage::disk('public')->mimeType($path);
 
         return response($file, 200)->header('Content-Type', $type);
     }

@@ -50,7 +50,7 @@ class RoomController extends Controller
             if ($request->hasFile('image')) {
                 // Simpan file gambar ke dalam folder 'images' di 'storage/app/private'
                 $file = $request->file('image');
-                $imagePath = Storage::disk('private')->put('room_images', $file);
+                $imagePath = Storage::disk('public')->put('room_images', $file);
                 $validatedData['image'] = $imagePath;
             }
             Room::create($validatedData);
@@ -87,12 +87,12 @@ class RoomController extends Controller
             ]);
             if ($request->hasFile('image')) {
                 // Hapus gambar lama jika ada
-                if ($room->image && Storage::disk('private')->exists($room->image)) {
-                    Storage::disk('private')->delete($room->image);
+                if ($room->image && Storage::disk('public')->exists($room->image)) {
+                    Storage::disk('public')->delete($room->image);
                 }
                 // Simpan file gambar baru ke dalam folder 'room_images' di 'storage/app/private'
                 $file = $request->file('image');
-                $imagePath = Storage::disk('private')->put('room_images', $file);
+                $imagePath = Storage::disk('public')->put('room_images', $file);
                 $validatedData['image'] = $imagePath;
             }
             $room->update($validatedData);

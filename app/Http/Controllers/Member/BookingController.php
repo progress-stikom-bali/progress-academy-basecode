@@ -31,13 +31,12 @@ class BookingController extends Controller
             'room_id' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'status' => 'required',
+            'amount' => 'required',
             'payment_receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
             $paymentReceiptPath = null;
-            $room = Room::find($validatedData['room_id']);
             if ($request->hasFile('payment_receipt')) {
                 // Simpan file gambar ke dalam folder 'payment_receipts' di 'storage/app/public'
                 $file = $request->file('payment_receipt');
@@ -46,7 +45,6 @@ class BookingController extends Controller
             }
 
             Booking::create($validatedData);
-            $room->update(['is_available' => 1]);
 
             return redirect()->route('user.dashboard')->with('success', 'Booking has been successfully created.');
         } catch (ValidationException $e) {

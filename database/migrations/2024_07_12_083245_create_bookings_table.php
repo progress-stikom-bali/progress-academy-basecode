@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
+            $table->integer('amount');
             $table->string('payment_receipt');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
