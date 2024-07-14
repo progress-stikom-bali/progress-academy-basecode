@@ -57,7 +57,8 @@
             </div>
         </div>
     </div>
-
+@endsection
+@push('scripts') 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const startDateInput = document.getElementById('start_date');
@@ -83,4 +84,4 @@
             endDateInput.addEventListener('change', calculateAmount);
         });
     </script>
-@endsection
+@endpush
