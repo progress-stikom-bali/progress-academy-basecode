@@ -22,9 +22,9 @@
                     <div class="d-flex flex-column gap-2">
                         <h5>IDR {{ number_format($item->roomType->daily_price) }}</h5>
                         @if ($item->is_available == 0)
-                            <button class="btn btn-success">Available</button>
+                            <div class="badge bg-success py-1"><h6>Available</h6></div>
                         @else
-                            <button class="btn btn-danger">Booked</button>
+                            <div class="badge bg-danger py-1"><h6>Booked</h6></div>
                         @endif
                         <a href="{{ route('user.roomDetail', $item->id) }}" class="btn btn-primary">Detail</a>
                     </div>

@@ -26,12 +26,12 @@
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#paymentReceiptModal">
+                            data-bs-target="#paymentReceiptModal-{{ $loop->iteration }}">
                             View
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="paymentReceiptModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="paymentReceiptModal-{{ $loop->iteration }}" tabindex="-1" role="dialog"
                             aria-labelledby="paymentReceiptModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">

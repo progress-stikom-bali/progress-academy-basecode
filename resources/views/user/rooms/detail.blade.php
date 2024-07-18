@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <img src="{{ route('show.room.image', basename($room->image)) }}" alt="room_image" class="w-100">
+                <img src="{{ Storage::url($room->image) }}" alt="room_image" class="w-100">
             </div>
             <div class="col-6">
                 <h1>{{ $room->name }}</h1>

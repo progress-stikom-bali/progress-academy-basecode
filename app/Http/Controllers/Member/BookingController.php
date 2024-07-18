@@ -32,12 +32,12 @@ class BookingController extends Controller
             'end_date' => 'required|date',
             'amount' => 'required',
             'payment_receipt' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+         ]);
 
         try {
             $paymentReceiptPath = null;
             if ($request->hasFile('payment_receipt')) {
-                // Simpan file gambar ke dalam folder 'payment_receipts' di 'storage/app/public'
+                // Simpan file gambar ke dalam folder 'payment_receipts' di 'storage/app/private
                 $file = $request->file('payment_receipt');
                 $paymentReceiptPath = Storage::disk('private')->put('payment_receipts', $file);
                 $validatedData['payment_receipt'] = $paymentReceiptPath;

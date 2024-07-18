@@ -65,20 +65,4 @@ class BookingController extends Controller
             return back()->with('error', 'An error occurred while rejecting the booking. Please try again.');
         }
     }
-    public function update(Request $request, string $id)
-    {
-        try {
-            $booking = Booking::find($request->id);
-            $booking->update(
-                [
-                    'is_available' => 0,
-                    'status' => 'rejected',
-                    'rejected_reason' => $request->rejected_reason,
-                ]
-            );
-            return redirect()->route('admin.booking.index')->with('success', 'Booking has been successfully rejected.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while rejecting the booking. Please try again.');
-        }
-    }
 }

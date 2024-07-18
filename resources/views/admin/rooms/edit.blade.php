@@ -19,7 +19,7 @@
                 <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
-        <img src="{{ route('show.room.image', basename($data->image)) }}" alt="room_image" class="w-25 my-3">
+        <img src="{{ Storage::url($item->image) }}" alt="room_image" class="w-25 my-3">
         <div class="mb-3">
             <label for="room_image">Image</label>
             <input type="file" name="image" class="form-control mb-2" required>
