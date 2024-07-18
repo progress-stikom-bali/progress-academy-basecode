@@ -3,6 +3,7 @@
 
 {{-- Section untuk menaruh content ke layout --}}
 @section('content')
+<div class="table-responsive">
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -67,9 +68,10 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center">No Data</td>
+                    <td colspan="9" class="text-center">No Data</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
+</div>
 @endsection
