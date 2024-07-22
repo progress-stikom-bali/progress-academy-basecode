@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/room-type*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('admin/roomtype*') ? 'active' : '' }}"
                         href="{{ route('admin.roomType.index') }}">
                         <span data-feather="shopping-cart"></span>
                         Room Type
