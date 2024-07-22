@@ -46,14 +46,14 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user/dashboard*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('user/dashboard') || request()->is('user/dashboard/room*') ? 'active' : '' }}"
                         href="{{ route('user.dashboard') }}">
                         <span data-feather="shopping-cart"></span>
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user/transactions*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('user/dashboard/transactions*') ? 'active' : '' }}"
                         href="{{ route('user.transactions') }}">
                         <span data-feather="shopping-cart"></span>
                         Your Bookings
