@@ -74,8 +74,16 @@ class UserController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
+                'password' => 'nullable|string|min:8',
                 'role_id' => 'required',
             ]);
+
+            if($validatedData['password'] != null) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            } else {
+                unset($validatedData['password']);
+            }
+
             $user->update($validatedData);
             return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
         } catch (ValidationException $e) {

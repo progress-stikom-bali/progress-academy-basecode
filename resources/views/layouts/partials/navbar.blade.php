@@ -7,10 +7,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="nav-link px-3" type="submit">Sign out</button>
-            </form>
+            <button class="nav-link px-3" type="submit">Sign out</button>
         </div>
     </div>
 </header>

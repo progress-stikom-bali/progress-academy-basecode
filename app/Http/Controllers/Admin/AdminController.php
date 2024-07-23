@@ -71,7 +71,7 @@ class AdminController extends Controller
         $viewData = [
             'title' => "Edit Admin",
             'activePage' => "user",
-            'admin' => $admin, 
+            'admin' => $admin,
         ];
         return view('admin.admin.edit', $viewData);
     }
@@ -83,8 +83,16 @@ class AdminController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
+                'password' => 'nullable|string|min:8',
                 'role_id' => 'required',
             ]);
+
+            if ($validatedData['password'] != null) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            } else {
+                unset($validatedData['password']);
+            }
+
             $admin->update($validatedData);
             return redirect()->route('admin.admin.index')->with('success', 'User updated successfully!');
         } catch (ValidationException $e) {
