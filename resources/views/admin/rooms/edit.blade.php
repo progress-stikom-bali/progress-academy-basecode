@@ -22,7 +22,7 @@
         <img src="{{ Storage::url($data->image) }}" alt="room_image" class="w-25 my-3">
         <div class="mb-3">
             <label for="room_image">Image</label>
-            <input type="file" name="image" class="form-control mb-2" required>
+            <input type="file" name="image" class="form-control mb-2">
             @error('image')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
