@@ -45,8 +45,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-<<<<<<< HEAD
-=======
 
     public function role()
     {
@@ -62,5 +60,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
->>>>>>> basecode
 }
