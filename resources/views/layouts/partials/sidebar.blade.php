@@ -9,29 +9,32 @@
                         Dashboard
                     </a>
                 </li>
+                @php
+                    $route = Request::route()->getName();
+                @endphp
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin*') ? 'active' : '' }}"
+                    <a class="nav-link {{ $route == 'admin.admin.index' ? 'active' : '' }}"
                         href="{{ route('admin.admin.index') }}">
                         <span data-feather="file"></span>
                         Admin
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}"
                         href="{{ route('admin.user.index') }}">
                         <span data-feather="shopping-cart"></span>
                         Users
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('roomtype*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('admin/roomtype*') ? 'active' : '' }}"
                         href="{{ route('admin.roomType.index') }}">
                         <span data-feather="shopping-cart"></span>
                         Room Type
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('rooms*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('admin/rooms*') ? 'active' : '' }}"
                         href="{{ route('admin.rooms.index') }}">
                         <span data-feather="shopping-cart"></span>
                         Room
