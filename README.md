@@ -11,3 +11,19 @@ Step to use this:
 Account:
 - email: admin@admin.com
 - password: password
+
+
+Step by step day 1 : 
+1. Login page (copas dari notion)
+2. Logic login
+3. Logout
+4. Setup middleware -> jangan lupa daftarin middleware di bootstrap/app.php
+5. Register layout (copas dari notion) 
+6. Logic register
+7. CRUD room type
+8. CRUD room
+
+Step by step day 2 : 
+1. Create halaman user (copas dari notion)
+2. CRUD user page untuk melakukan booking
+3. CRUD admin untuk approve / reject booking 

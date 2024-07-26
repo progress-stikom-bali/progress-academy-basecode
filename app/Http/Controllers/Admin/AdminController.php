@@ -29,6 +29,11 @@ class AdminController extends Controller
         return view('admin.admin.index', $viewData);
     }
 
+    public function dashboard(){
+        $title = 'Dashboard Admin';
+        return view('admin.dashboard', ['title' => $title]);
+    }
+
     public function create()
     {
         $viewData = [

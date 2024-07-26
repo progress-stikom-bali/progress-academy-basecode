@@ -7,7 +7,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <button class="nav-link px-3" type="submit">Sign out</button>
+            <a class="nav-link px-3" href="/logout">Sign out</a>
         </div>
     </div>
 </header>

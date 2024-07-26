@@ -14,7 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias([]);
+        $middleware->alias([
+            'AuthAdmin' => \App\Http\Middleware\AuthAdmin::class,
+            'AuthMember' => \App\Http\Middleware\AuthMember::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
